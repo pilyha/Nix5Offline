@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProblemDaoImpl implements ProblemDao {
-    Connection connection;
+   private final Connection connection;
 
     public ProblemDaoImpl(Connection connection) {
         this.connection = connection;

@@ -11,6 +11,7 @@ import java.io.UncheckedIOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -31,14 +32,10 @@ public class SolutionToTheProblem {
             ProblemDaoImpl problemDao = new ProblemDaoImpl(connection);
             SolutionDaoImpl solutionDao = new SolutionDaoImpl(connection);
 
+            List<Solution> solutions = new ArrayList<>();
             List<Location> locations = locationDao.get();
             List<Problem> problems = problemDao.get();
             List<Route> routes = routeDao.get();
-            List<Solution> solutions = solutionDao.get();
-            System.out.println("locations = " + locations);
-            System.out.println("routes = " + routes);
-            System.out.println("problems = " + problems);
-                System.out.println("solutions = " + solutions);
 
             DefaultDirectedWeightedGraph<String, DefaultEdge> graph = new DefaultDirectedWeightedGraph<>(DefaultEdge.class);
             for (Location location : locations) {

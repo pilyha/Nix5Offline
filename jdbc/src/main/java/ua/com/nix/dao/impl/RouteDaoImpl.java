@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteDaoImpl implements RouteDao {
-    Connection connection;
+    private final Connection connection;
 
     public RouteDaoImpl(Connection connection) {
         this.connection = connection;

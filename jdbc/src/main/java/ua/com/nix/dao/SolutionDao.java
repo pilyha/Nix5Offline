@@ -7,7 +7,5 @@ import java.util.List;
 
 public interface SolutionDao {
 
-    List<Solution> get();
-
     void create(List<Solution> solutions);
 }
