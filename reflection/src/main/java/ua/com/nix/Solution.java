@@ -1,6 +1,6 @@
 package ua.com.nix;
 
-import ua.com.nix.Annotation.PropertyKey;
+import ua.com.nix.annotation.PropertyKey;
 
 import java.io.IOException;
 import java.io.InputStream;

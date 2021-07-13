@@ -1,6 +1,6 @@
 package ua.com.nix.properties;
 
-import ua.com.nix.Annotation.PropertyKey;
+import ua.com.nix.annotation.PropertyKey;
 
 public class AppProperties {
 

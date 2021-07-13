@@ -1,4 +1,4 @@
-package ua.com.nix.Annotation;
+package ua.com.nix.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
