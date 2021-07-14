@@ -39,7 +39,7 @@ public class Solution {
                 }
             }
         }
-        return (T) instance;
+        return instance;
     }
 
     private static Properties load(String properties) {
