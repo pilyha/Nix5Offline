@@ -10,12 +10,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Solution {
-    public  void run()
-    {
+    public void run() {
         File csv = new File("csv_parser/src/main/resources/input.csv");
         CSV data = Parser.parse(csv);
-        System.out.println("Search by number of row and number of column: " + data.get(0,  0));
-        System.out.println("Search by number of row and name of column: " + data.get(0,"age"));
+        System.out.println("Search by number of row and number of column: " + data.get(0, 0));
+        System.out.println("Search by number of row and name of column: " + data.get(0, "age"));
         System.out.println("Search all header: " + Arrays.toString(data.getHeader()));
         System.out.println("*************************");
         List<User> list = Mapper.map(data, User.class);

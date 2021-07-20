@@ -1,20 +1,18 @@
 package ua.com.nix.csv;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CSV {
 
-    private List<String[]> data;
+    private final List<String[]> data;
 
     public CSV() {
         this.data = new ArrayList<>();
     }
 
-    public CSV(List<String[]> data) {
-        this.data = data;
-    }
-
     public String get(int row, int col) {
+
         return data.get(row + 1)[col];
     }
 

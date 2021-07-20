@@ -15,7 +15,10 @@ public class User {
     private int age;
     @CSVCell("sex")
     private Sex sex;
-
+    @CSVCell("salary")
+    private double salary;
+    @CSVCell("fired")
+    private boolean isFired;
 
     @Override
     public String toString() {
@@ -24,6 +27,10 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
                 ", sex=" + sex +
+                ", salary=" + salary +
+                ", isFired=" + isFired +
                 '}';
     }
+
+
 }
