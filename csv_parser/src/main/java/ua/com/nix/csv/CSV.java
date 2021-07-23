@@ -9,6 +9,7 @@ public class CSV {
 
     public CSV() {
         this.data = new ArrayList<>();
+
     }
 
     public String get(int row, int col) {
@@ -17,9 +18,17 @@ public class CSV {
     }
 
     public String get(int row, String header) {
-        int col = List.of(this.data.get(0)).indexOf(header);
-        if (col == -1) {
-            throw new RuntimeException("Field not found");
+        int col = -1;
+        String[] headers = getHeader();
+        for (int i = 0; i < headers.length; i++) {
+            if(headers[i].equals(header)) {
+                col = i;
+                break;
+            }
+        }
+        if(col == -1)
+        {
+            return null;
         }
         return data.get(row + 1)[col];
     }

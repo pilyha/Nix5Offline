@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Mapper {
-    public static <T> List<T> map(CSV data, Class<T> type) {
+    public  <T> List<T> map(CSV data, Class<T> type) {
         List<T> objects = new ArrayList<>();
 
         T instance = null;

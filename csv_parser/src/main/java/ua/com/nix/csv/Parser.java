@@ -3,7 +3,7 @@ package ua.com.nix.csv;
 import java.io.*;
 
 public class Parser {
-    public static CSV parse(File fileName) {
+    public CSV parse(File fileName) {
         CSV data = new CSV();
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line = reader.readLine();

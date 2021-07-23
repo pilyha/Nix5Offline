@@ -13,8 +13,8 @@ public class User {
     private String lastName;
     @CSVCell("age")
     private int age;
-    @CSVCell("sex")
-    private Sex sex;
+    @CSVCell("gender")
+    private Gender gender;
     @CSVCell("salary")
     private double salary;
     @CSVCell("fired")
@@ -26,11 +26,9 @@ public class User {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", sex=" + sex +
+                ", sex=" + gender +
                 ", salary=" + salary +
                 ", isFired=" + isFired +
                 '}';
     }
-
-
 }
