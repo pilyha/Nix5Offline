@@ -1,14 +1,21 @@
 package ua.com.nix.csv;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class CSV {
 
     private final List<String[]> data;
+    private final List<String> header;
+    private Map<Integer,String> headers;
 
     public CSV() {
         this.data = new ArrayList<>();
+        header = Arrays.asList(data.get(0));
+
+        for (int i = 0; i < header.size(); i++) {
+            headers.put(i,header.get(i));
+        }
+        System.out.println(headers);
 
     }
 
