@@ -15,11 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Solution {
-    private OperationControlService operationControl;
-    private ExportService exportService;
 
     public void createOperation(EntityManager entityManager, User user) {
-        operationControl = new OperationControlService(entityManager);
+        OperationControlService operationControl = new OperationControlService(entityManager);
         try {
             entityManager.getTransaction().begin();
             Account account = operationControl.getAccountById(user.getId());
@@ -55,7 +53,7 @@ public class Solution {
     }
     public void exportDataToCSV(User user) {
         try (Connection connection = Connector.getConnection()) {
-            exportService = new ExportService(connection);
+            ExportService exportService = new ExportService(connection);
 
             exportService.exportOperationsInPeriodToCsv(
                     user,

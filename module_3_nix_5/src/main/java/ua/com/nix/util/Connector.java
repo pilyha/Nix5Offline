@@ -31,12 +31,4 @@ public class Connector {
         }
         return connection;
     }
-
-    public static void closeConnection() {
-        try {
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 }
