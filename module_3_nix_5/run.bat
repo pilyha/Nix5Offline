@@ -1,0 +1,1 @@
+cd module_3_nix_5/ || exit & mvn clean install & java -jar target/module_3_nix_5-1.0-SNAPSHOT.jar olgaku@gmail.com postgres 12345
