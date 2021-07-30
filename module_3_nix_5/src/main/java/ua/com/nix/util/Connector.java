@@ -20,14 +20,14 @@ public class Connector {
         try {
             connection = DriverManager.getConnection(url, props);
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Could not connect to DB: " + e.getMessage());
         }
         return connection;
     }
 
     public static Connection getConnection() {
         if (connection == null) {
-            throw new RuntimeException("You should create connection!");
+            throw new RuntimeException("For the first create connection");
         }
         return connection;
     }
