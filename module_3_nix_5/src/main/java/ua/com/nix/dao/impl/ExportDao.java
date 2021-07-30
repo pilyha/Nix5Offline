@@ -44,7 +44,7 @@ public class ExportDao {
         try (Writer writer = new FileWriter(filePath); CSVWriter csvWriter = new CSVWriter(writer)) {
             csvWriter.writeAll(csvData);
             csvWriter.writeNext(secondHeader);
-            csvWriter.writeNext(new String[]{dateFrom.toString() + "-" + dateTo.toString(), String.valueOf(totalIncome), String.valueOf(balance)});
+            csvWriter.writeNext(new String[]{dateFrom.toString() + " - " + dateTo.toString(), String.valueOf(totalIncome), String.valueOf(balance)});
         } catch (IOException e) {
             LOGGER_ERROR.error("File problem");
             throw new RuntimeException("Problem while working with a file");
