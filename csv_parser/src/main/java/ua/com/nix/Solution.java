@@ -6,17 +6,24 @@ import ua.com.nix.csv.Parser;
 import ua.com.nix.model.User;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Solution {
     public void run() {
         Mapper mapper = new Mapper();
         Parser parser = new Parser();
-        File csv = new File("csv_parser/src/main/resources/input.csv");
+        File csv;
+        try {
+            csv = new File(Objects.requireNonNull(Solution.class.getResource("/input.csv")).toURI().getPath());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Incorrect file..." + e.getMessage());
+        }
         CSV data = parser.parse(csv);
         System.out.println("Search by number of row and number of column: " + data.get(0, 0));
-        System.out.println("Search by number of row and name of column: " + data.get(0, "age"));
+        System.out.println("Search by number of row and name of column: " + data.get(0, "name"));
         System.out.println("Search all header: " + Arrays.toString(data.getHeader()));
         System.out.println("*************************");
         List<User> list = mapper.map(data, User.class);

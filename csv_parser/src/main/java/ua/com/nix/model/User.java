@@ -26,7 +26,7 @@ public class User {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", sex=" + gender +
+                ", gender=" + gender +
                 ", salary=" + salary +
                 ", isFired=" + isFired +
                 '}';

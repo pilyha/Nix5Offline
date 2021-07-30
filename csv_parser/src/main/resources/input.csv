@@ -1,5 +1,5 @@
 firstName,lastName,age,gender,salary,fired
-Ivan,Ivanov,24,Man,2431.5,false
-Liza,Vodovozova,52,Woman,1424.75,false
-Alexey,Dobrin,32,Man,3241.21,true
-Olga,Aleshina,35,Woman,4534.34,true
+Ivan,Ivanov,24,MAN,2431.5,false
+Liza,Vodovozova,52,WOMAN,1424.75,false
+Alexey,Dobrin,32,MAN,3241.21,true
+Olga,Aleshina,35,WOMAN,4534.34,true
