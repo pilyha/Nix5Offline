@@ -35,4 +35,19 @@ public class User {
         this.email = email;
         this.accounts = accounts;
     }
+
+    public User(Integer id, String firstName, String lastName, String email) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+    }
+
+    public User(Integer id, String firstName, String lastName, String email, List<Account> accounts) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.accounts = accounts;
+    }
 }

@@ -24,4 +24,14 @@ public class Account {
     @OneToMany(mappedBy = "account")
     private List<Operation> operations;
 
+    public Account() {
+    }
+
+    public Account(Integer id, User user, Integer balance) {
+        this.id = id;
+        this.user = user;
+        this.balance = balance;
+    }
+
+
 }

@@ -27,4 +27,10 @@ public class ExportService {
         exportDao.exportOperationsInPeriodToCsv(account,dateFrom.toInstant(ZoneOffset.UTC),dateTo.toInstant(ZoneOffset.UTC),filePath);
         LOGGER_INFO.info("End export operations from: " + dateFrom.toString() + " to: " + dateTo.toString() + " to csv file: " + filePath);
     }
+    public User getUserByEmail(String email){
+        LOGGER_INFO.info("Start searching user with email: " + email);
+        User user = exportDao.getUserByEmail(email);
+        LOGGER_INFO.info("End searching user with email: " + email);
+        return user;
+    }
 }
