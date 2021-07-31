@@ -1,6 +1,8 @@
 package ua.com.nix.UI;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import ua.com.nix.dao.impl.OperationDaoImpl;
 import ua.com.nix.model.Account;
 import ua.com.nix.model.Operation;
 import ua.com.nix.model.OperationCategory;
@@ -15,24 +17,32 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OperationController {
     private final String email;
-    private final EntityManager entityManager;
+    private final Session session;
+    private final String userName;
+    private final String password;
 
-    public OperationController(EntityManager entityManager,String email) {
+
+    public OperationController(Session session, String email, String userName, String password) {
         this.email = email;
-        this.entityManager = entityManager;
+        this.session = session;
+        this.userName = userName;
+        this.password = password;
     }
 
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public void financeInterface() throws IOException {
+        MainLabel:
         while (true) {
             System.out.println("""
                     Enter task:
@@ -44,23 +54,37 @@ public class OperationController {
             switch (choice) {
                 case "1": {
                     createOperation();
+                    break;
                 }
                 case "2": {
                     exportDataToCSV();
+                    break;
+                }
+                case "0": {
+                    break MainLabel;
+                }
+                default:{
+                    System.out.println("Incorrect choose,try again...");
+                    break;
                 }
             }
         }
     }
+
     private void createOperation() {
-        OperationControlService operationControl = new OperationControlService(entityManager);
+        OperationControlService operationControl = new OperationControlService(new OperationDaoImpl(session));
         try {
-            entityManager.getTransaction().begin();
+            session.getTransaction().begin();
             User user = operationControl.getUserByEmail(email);
             Account account = operationControl.getAccountById(user.getId());
 
             List<OperationCategory> expenseOperationsCategories = new ArrayList<>();
             List<OperationCategory> incomeOperationCategories = new ArrayList<>();
-            System.out.println("Please chose 1/2 (Income/expense)");
+            System.out.println("""
+                    Enter task:
+                    1 -> Income operation
+                    2 -> Expense operation
+                    0 -> Return to menu""");
             String choose = reader.readLine();
             if (choose.equals("1")) {
                 System.out.println("Enter name of income category");
@@ -89,24 +113,42 @@ public class OperationController {
                     System.out.println("There is no such expense category,try again...");
                 }
             }
-
-            entityManager.getTransaction().commit();
+            else if (choose.equals("3")) {
+            return;
+            }
+            session.getTransaction().commit();
         } catch (HibernateException e) {
-            entityManager.getTransaction().rollback();
+            session.getTransaction().rollback();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public void exportDataToCSV() {
-        try (Connection connection = Connector.getConnection()) {
+        try (Connection connection = Connector.createConnection(userName, password)) {
             ExportService exportService = new ExportService(connection);
             User user = exportService.getUserByEmail(email);
             System.out.println("Enter date from in format yyyy-MM-ddTHH:MM:SS :");
             String from = reader.readLine();
-            LocalDateTime dateFrom = LocalDateTime.parse(from);
+            LocalDateTime dateFrom;
+            try {
+                dateFrom = LocalDateTime.parse(from);
+            }catch (DateTimeParseException e)
+            {
+                System.out.println("Error,enter correct date with help format");
+                return;
+            }
+
             System.out.println("Enter date to in format yyyy-MM-ddTHH:MM:SS :");
             String to = reader.readLine();
             LocalDateTime dateTo = LocalDateTime.parse(to);
+            try {
+                dateTo = LocalDateTime.parse(from);
+            }catch (DateTimeParseException e)
+            {
+                System.out.println("Error,enter correct date with help format");
+                return;
+            }
 
             exportService.exportOperationsInPeriodToCsv(
                     user,

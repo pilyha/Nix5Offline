@@ -1,13 +1,11 @@
 package ua.com.nix.service;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.com.nix.dao.OperationDao;
 import ua.com.nix.dao.impl.OperationDaoImpl;
 import ua.com.nix.model.*;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 public class OperationControlService {
@@ -15,8 +13,8 @@ public class OperationControlService {
     private static final Logger LOGGER_ERROR = LoggerFactory.getLogger("error");
     private final OperationDao operationDao;
 
-    public OperationControlService(EntityManager entityManager) {
-        this.operationDao = new OperationDaoImpl(entityManager);
+    public OperationControlService(OperationDaoImpl operationDao) {
+        this.operationDao = operationDao;
     }
 
     public void createOperation(Operation operation, User user) {
@@ -26,7 +24,7 @@ public class OperationControlService {
             throw new IllegalArgumentException("Operation hasn't category");
         }
         if (!user.getId().equals(operation.getAccount().getUser().getId())) {
-            LOGGER_ERROR.error(" This user: " + user.getId() + " does not have such an account: " +  operation.getAccount().getId());
+            LOGGER_ERROR.error(" This user: " + user.getId() + " does not have such an account: " + operation.getAccount().getId());
             throw new RuntimeException(new IllegalAccessException("User hasn't account"));
         }
         if (operation.getResult() == 0) {

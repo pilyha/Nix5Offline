@@ -1,9 +1,9 @@
 package ua.com.nix.dao.impl;
 
+import org.hibernate.Session;
 import ua.com.nix.dao.OperationDao;
 import ua.com.nix.model.*;
 
-import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -11,15 +11,15 @@ import java.util.List;
 
 public class OperationDaoImpl implements OperationDao {
 
-    private final EntityManager entityManager;
+    private final Session session;
 
-    public OperationDaoImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public OperationDaoImpl(Session session) {
+        this.session = session;
     }
 
     public void createOperation(Operation operation) {
-        entityManager.persist(operation);
-        Query updateQuery = entityManager.createQuery(
+        session.persist(operation);
+        Query updateQuery = session.createQuery(
                 "update Account account set account.balance = account.balance + :balance where account.id = :id");
 
         updateQuery.setParameter("balance", operation.getResult());
@@ -29,11 +29,11 @@ public class OperationDaoImpl implements OperationDao {
     }
 
     public Account getAccountById(Integer id) {
-        return entityManager.find(Account.class, id);
+        return session.find(Account.class, id);
     }
 
     public ExpenseCategory getExpenseCategoryByName(String name) {
-        TypedQuery<ExpenseCategory> query = entityManager.createQuery(
+        TypedQuery<ExpenseCategory> query = session.createQuery(
                 "select category from ExpenseCategory category where category.name = :name",
                 ExpenseCategory.class);
 
@@ -50,7 +50,7 @@ public class OperationDaoImpl implements OperationDao {
     }
 
     public IncomeCategory getIncomeCategoryByName(String name) {
-        TypedQuery<IncomeCategory> query = entityManager.createQuery(
+        TypedQuery<IncomeCategory> query = session.createQuery(
                 "select category from IncomeCategory category where category.name = :name",
                 IncomeCategory.class);
 
@@ -67,7 +67,7 @@ public class OperationDaoImpl implements OperationDao {
     }
 
     public User getUserByEmail(String email) {
-        TypedQuery<User> query = entityManager.createQuery(
+        TypedQuery<User> query = session.createQuery(
                 "select us from User us where us.email = :email",
                 User.class);
 
@@ -85,7 +85,7 @@ public class OperationDaoImpl implements OperationDao {
 
     public void addOperationCategories(List<OperationCategory> operationCategories) {
         for (OperationCategory operationCategory : operationCategories) {
-            entityManager.persist(operationCategory);
+            session.persist(operationCategory);
         }
     }
 }

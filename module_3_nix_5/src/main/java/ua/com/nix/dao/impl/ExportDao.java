@@ -122,31 +122,32 @@ public class ExportDao {
         totalIncome = resultSet.getInt(1);
         return totalIncome;
     }
-    public User getUserByEmail(String email){
+
+    public User getUserByEmail(String email) {
         User user = null;
         User userTemp = null;
-            try (PreparedStatement preparedStatement = connection.prepareStatement(
-                    "select * from users where email=?")) {
-                preparedStatement.setString(1, email);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                List<Account> accounts = new ArrayList<>();
-                while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    email = resultSet.getString("email");
-                    String firstName = resultSet.getString("firstname");
-                    String lastName = resultSet.getString("lastname");
-                    userTemp = new User(id,firstName,lastName,email);
-                    accounts.add(getAccountById(userTemp));
-                    user = new User(id,firstName,lastName,email,accounts);
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "select * from users where email=?")) {
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Account> accounts = new ArrayList<>();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                email = resultSet.getString("email");
+                String firstName = resultSet.getString("firstname");
+                String lastName = resultSet.getString("lastname");
+                userTemp = new User(id, firstName, lastName, email);
+                accounts.add(getAccountById(userTemp));
+                user = new User(id, firstName, lastName, email, accounts);
 
-                }
             }
-            catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return user;
     }
-    private Account getAccountById(User userTemp){
+
+    private Account getAccountById(User userTemp) {
         Account account = null;
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "select * from accounts where user_id=?")) {
@@ -157,10 +158,9 @@ public class ExportDao {
                 int id = resultSet.getInt("id");
                 int balance = resultSet.getInt("balance");
                 int user_id = resultSet.getInt("user_id");
-                account = new Account(id, userTemp,balance);
+                account = new Account(id, userTemp, balance);
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return account;

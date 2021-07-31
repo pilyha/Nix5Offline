@@ -15,12 +15,7 @@ public class Solution {
     public void run() {
         Mapper mapper = new Mapper();
         Parser parser = new Parser();
-        File csv;
-        try {
-            csv = new File(Objects.requireNonNull(Solution.class.getResource("/input.csv")).toURI().getPath());
-        } catch (URISyntaxException e) {
-            throw new RuntimeException("Incorrect file..." + e.getMessage());
-        }
+        String csv = "input.csv";
         CSV data = parser.parse(csv);
         System.out.println("Search by number of row and number of column: " + data.get(0, 0));
         System.out.println("Search by number of row and name of column: " + data.get(0, "name"));

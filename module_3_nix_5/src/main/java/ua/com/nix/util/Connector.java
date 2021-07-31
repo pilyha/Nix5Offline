@@ -24,11 +24,4 @@ public class Connector {
         }
         return connection;
     }
-
-    public static Connection getConnection() {
-        if (connection == null) {
-            throw new RuntimeException("For the first create connection");
-        }
-        return connection;
-    }
 }
