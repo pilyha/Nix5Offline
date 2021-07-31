@@ -5,12 +5,10 @@ import java.util.*;
 public class CSV {
 
     private final List<String[]> data;
-    private final List<String[]> header;
     private final Map<String,Integer> headers;
 
     public CSV() {
         this.data = new ArrayList<>();
-        this.header = new ArrayList<>();
         this.headers = new HashMap<>();
     }
 
@@ -29,7 +27,7 @@ public class CSV {
     }
 
     public String[] getHeader() {
-       return this.data.get(0);
+        return this.data.get(0);
     }
 
     public void add(String[] row) {
