@@ -18,7 +18,7 @@ public class ArrayWithTwoThread implements Runnable {
     @Override
     public void run() {
         for (int i = firstIndex; i < lastIndex; i++) {
-            if (checkSimple(i)) {
+            if (checkSimple(list.get(i))) {
                 counter++;
             }
         }
