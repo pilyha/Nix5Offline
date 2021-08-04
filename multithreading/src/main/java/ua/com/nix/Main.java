@@ -26,13 +26,14 @@ public class Main {
         ArrayWithTwoThread second = new ArrayWithTwoThread(list, (list.size() / 2) + 1, list.size() - 1);
         Thread t2 = new Thread(second);
         t1.start();
+        t2.start();
         try {
             t1.join();
+            t2.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        t2.start();
-            System.out.println(first.get());
-            System.out.println(second.get());
+        System.out.println(first.get());
+        System.out.println(second.get());
     }
 }

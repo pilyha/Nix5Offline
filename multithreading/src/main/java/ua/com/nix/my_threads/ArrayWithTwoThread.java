@@ -2,14 +2,14 @@ package ua.com.nix.my_threads;
 
 import java.util.List;
 
-public class ArrayWithTwoThread implements Runnable{
+public class ArrayWithTwoThread implements Runnable {
     private volatile List<Integer> list;
     private Integer counter;
     private Integer firstIndex;
     private Integer lastIndex;
 
 
-    public ArrayWithTwoThread(List<Integer> list,Integer firstIndex, Integer lastIndex) {
+    public ArrayWithTwoThread(List<Integer> list, Integer firstIndex, Integer lastIndex) {
         this.list = list;
         this.counter = 0;
         this.firstIndex = firstIndex;
@@ -19,8 +19,7 @@ public class ArrayWithTwoThread implements Runnable{
     @Override
     public void run() {
         for (int i = firstIndex; i < lastIndex; i++) {
-            if(checkSimple(i))
-            {
+            if (checkSimple(i)) {
                 counter++;
             }
         }
@@ -42,8 +41,8 @@ public class ArrayWithTwoThread implements Runnable{
         }
         return true;
     }
-    public synchronized Object get()
-    {
+
+    public synchronized Object get() {
         while (counter == null) {
             try {
                 wait();
