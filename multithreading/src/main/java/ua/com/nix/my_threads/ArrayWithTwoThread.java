@@ -8,7 +8,6 @@ public class ArrayWithTwoThread implements Runnable {
     private Integer firstIndex;
     private Integer lastIndex;
 
-
     public ArrayWithTwoThread(List<Integer> list, Integer firstIndex, Integer lastIndex) {
         this.list = list;
         this.counter = 0;
@@ -23,7 +22,6 @@ public class ArrayWithTwoThread implements Runnable {
                 counter++;
             }
         }
-
     }
 
     private boolean checkSimple(int i) {
@@ -50,7 +48,6 @@ public class ArrayWithTwoThread implements Runnable {
                 e.printStackTrace();
             }
         }
-
         return counter;
     }
 }

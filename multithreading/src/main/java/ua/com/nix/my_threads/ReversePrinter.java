@@ -8,5 +8,10 @@ public class ReversePrinter extends Thread {
 
     @Override
     public void run() {
+        try {
+            join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

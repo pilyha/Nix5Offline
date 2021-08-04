@@ -10,13 +10,8 @@ public class Solution {
         System.out.println("************ First task ***********");
         Queue<Thread> threadList = Collections.asLifoQueue(new ArrayDeque<>());
         for (int i = 0; i < 50; i++) {
-            try {
-                new ReversePrinter("Hello from thread " + i).start();
-                new ReversePrinter("Hello from thread " + i).join();
-                threadList.add(new ReversePrinter("Hello from thread " + i));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            new ReversePrinter("Hello from thread " + i).start();
+            threadList.add(new ReversePrinter("Hello from thread " + i));
         }
         for (Thread thread : threadList) {
             System.out.println(thread.getName());
