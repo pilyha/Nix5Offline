@@ -2,16 +2,12 @@ package ua.com.nix.my_threads;
 
 public class ReversePrinter extends Thread {
 
-    public ReversePrinter(String name) {
-        super(name);
+    public ReversePrinter(int name) {
+        super(String.valueOf(name));
     }
 
     @Override
     public void run() {
-        try {
-            join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Hello from thread: " + this.getName());
     }
 }

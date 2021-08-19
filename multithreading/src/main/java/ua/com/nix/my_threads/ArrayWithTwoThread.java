@@ -1,8 +1,9 @@
 package ua.com.nix.my_threads;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
-public class ArrayWithTwoThread implements Runnable {
+public class ArrayWithTwoThread implements Callable<Integer> {
     private volatile List<Integer> list;
     private Integer counter;
     private Integer firstIndex;
@@ -16,12 +17,13 @@ public class ArrayWithTwoThread implements Runnable {
     }
 
     @Override
-    public void run() {
+    public Integer call() {
         for (int i = firstIndex; i < lastIndex; i++) {
             if (checkSimple(list.get(i))) {
                 counter++;
             }
         }
+        return counter;
     }
 
     private boolean checkSimple(int i) {
@@ -38,16 +40,5 @@ public class ArrayWithTwoThread implements Runnable {
             n = n + 6;
         }
         return true;
-    }
-
-    public synchronized Object get() {
-        while (counter == null) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return counter;
     }
 }
